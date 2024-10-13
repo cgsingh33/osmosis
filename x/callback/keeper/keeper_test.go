@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 )
 
 type KeeperTestSuite struct {

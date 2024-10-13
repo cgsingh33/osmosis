@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
-	// "github.com/osmosis-labs/osmosis/pkg/testutils"
+	"cosmossdk.io/math"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	callbackKeeper "github.com/osmosis-labs/osmosis/v26/x/callback/keeper"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
 )
@@ -14,7 +14,7 @@ import (
 func (s *KeeperTestSuite) TestCallbacks() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(101), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	validCoin := sdk.NewInt64Coin("stake", 10)
 	contractAddr := e2eTesting.GenContractAddresses(1)[0]
@@ -125,8 +125,8 @@ func (s *KeeperTestSuite) TestEstimateCallbackFees() {
 		CallbackGasLimit:               1,
 		MaxBlockReservationLimit:       params.MaxBlockReservationLimit,
 		MaxFutureReservationLimit:      params.MaxFutureReservationLimit,
-		FutureReservationFeeMultiplier: sdk.MustNewDecFromStr("0"),
-		BlockReservationFeeMultiplier:  sdk.MustNewDecFromStr("0"),
+		FutureReservationFeeMultiplier: math.LegacyMustNewDecFromStr("0"),
+		BlockReservationFeeMultiplier:  math.LegacyMustNewDecFromStr("0"),
 		MinPriceOfGas:                  params.MinPriceOfGas,
 	})
 	s.Require().NoError(err)

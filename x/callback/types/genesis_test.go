@@ -3,11 +3,12 @@ package types_test
 import (
 	"testing"
 
+	"cosmossdk.io/math"
 	"github.com/stretchr/testify/assert"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
 )
 
@@ -36,9 +37,9 @@ func TestGenesisValidate(t *testing.T) {
 					0,
 					100,
 					100,
-					sdk.MustNewDecFromStr("1.0"),
-					sdk.MustNewDecFromStr("1.0"),
-					sdk.NewCoin(sdk.DefaultBondDenom, sdk.ZeroInt()),
+					math.LegacyMustNewDecFromStr("1.0"),
+					math.LegacyMustNewDecFromStr("1.0"),
+					sdk.NewCoin(sdk.DefaultBondDenom, math.ZeroInt()),
 				),
 				Callbacks: []*types.Callback{
 					{

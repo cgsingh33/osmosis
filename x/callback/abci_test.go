@@ -10,7 +10,7 @@ import (
 
 	wasmdTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	callbackKeeper "github.com/osmosis-labs/osmosis/v26/x/callback/keeper"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
 )
@@ -25,7 +25,6 @@ const (
 func TestEndBlocker(t *testing.T) {
 	chain := e2eTesting.NewTestChain(t, 1)
 	keeper := chain.GetApp().CallbackKeeper
-	errorsKeeper := chain.GetApp().CWErrorsKeeper
 	msgServer := callbackKeeper.NewMsgServer(keeper)
 	contractAdminAcc := chain.GetAccount(0)
 
@@ -35,7 +34,7 @@ func TestEndBlocker(t *testing.T) {
 	// When job_id = 0, it decrements the count value
 	// When job_id = 2, it throws an error
 	// For any other job_id, it does nothing
-	codeID := chain.UploadContract(contractAdminAcc, "../../contracts/callback-test/artifacts/callback_test.wasm", wasmdTypes.DefaultUploadAccess)
+	codeID := chain.UploadContract(contractAdminAcc, "../../cosmwasm/contracts/callback-test/artifacts/callback_test.wasm", wasmdTypes.AllowEverybody)
 	initMsg := CallbackContractInstantiateMsg{Count: 100}
 	contractAddr, _ := chain.InstantiateContract(contractAdminAcc, codeID, contractAdminAcc.Address.String(), "callback_test", nil, initMsg)
 	chain.NextBlock(1)
@@ -91,18 +90,6 @@ func TestEndBlocker(t *testing.T) {
 			require.Equal(t, tc.expectedCount, count)
 		})
 	}
-
-	// Ensure error is captured by the cwerrors module - the case is when job id = 2
-	sudoErrs, err := errorsKeeper.GetErrorsByContractAddress(chain.GetContext(), contractAddr)
-	require.NoError(t, err)
-	require.Len(t, sudoErrs, 1)
-	require.Equal(t, "SomeError: execute wasm contract failed", sudoErrs[0].ErrorMessage)
-	require.Equal(t, "callback", sudoErrs[0].ModuleName)
-	require.Equal(t, int32(types.ModuleErrors_ERR_CONTRACT_EXECUTION_FAILED), sudoErrs[0].ErrorCode)
-
-	// Registering the contract for error subscription
-	_, err = errorsKeeper.SetSubscription(chain.GetContext(), contractAddr, contractAddr, sdk.NewInt64Coin(sdk.DefaultBondDenom, 0))
-	require.NoError(t, err)
 
 	params, err := keeper.GetParams(chain.GetContext())
 	require.NoError(t, err)

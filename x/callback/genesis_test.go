@@ -1,15 +1,16 @@
 package callback_test
 
 import (
-	sdkmath "cosmossdk.io/math"
 	"testing"
+
+	sdkmath "cosmossdk.io/math"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 
 	wasmdTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	"github.com/osmosis-labs/osmosis/v26/x/callback"
 	callbackKeeper "github.com/osmosis-labs/osmosis/v26/x/callback/keeper"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
@@ -22,7 +23,7 @@ func TestExportGenesis(t *testing.T) {
 	contractAdminAcc := chain.GetAccount(1)
 
 	// Upload and instantiate contract
-	codeID := chain.UploadContract(contractAdminAcc, "../../contracts/callback-test/artifacts/callback_test.wasm", wasmdTypes.DefaultUploadAccess)
+	codeID := chain.UploadContract(contractAdminAcc, "../../cosmwasm/contracts/callback-test/artifacts/callback_test.wasm", wasmdTypes.AllowEverybody)
 	initMsg := CallbackContractInstantiateMsg{Count: 100}
 	contractAddr, _ := chain.InstantiateContract(contractAdminAcc, codeID, contractAdminAcc.Address.String(), "callback_test", nil, initMsg)
 

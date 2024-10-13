@@ -7,8 +7,8 @@ import (
 )
 
 var (
-	DefaultCallbackGasLimit               = uint64(1000000)
-	DefaultMaxBlockReservationLimit       = uint64(3)
+	DefaultCallbackGasLimit               = uint64(280000000)
+	DefaultMaxBlockReservationLimit       = uint64(26)
 	DefaultMaxFutureReservationLimit      = uint64(10000)
 	DefaultBlockReservationFeeMultiplier  = sdkmath.LegacyZeroDec()
 	DefaultFutureReservationFeeMultiplier = sdkmath.LegacyZeroDec()

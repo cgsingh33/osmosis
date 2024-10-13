@@ -7,7 +7,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
 )
 

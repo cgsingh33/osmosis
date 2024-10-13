@@ -7,8 +7,7 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
-	// "github.com/osmosis-labs/osmosis/pkg/testutils"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	callbackKeeper "github.com/osmosis-labs/osmosis/v26/x/callback/keeper"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
 )
@@ -16,7 +15,7 @@ import (
 func (s *KeeperTestSuite) TestRequestCallback() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(101), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	contractAddr := e2eTesting.GenContractAddresses(1)[0]
 	contractAdminAcc := s.chain.GetAccount(2)
@@ -102,9 +101,9 @@ func (s *KeeperTestSuite) TestRequestCallback() {
 				// Ensure account balance has been updated
 				contractAdminBalance = contractAdminBalance.Sub(req.Fees)
 				if req.Sender == contractAddr.String() {
-					s.Require().True(contractAdminBalance.IsEqual(s.chain.GetBalance(contractAdminAcc.Address)))
+					s.Require().True(contractAdminBalance.Equal(s.chain.GetBalance(contractAdminAcc.Address)))
 				} else {
-					s.Require().True(contractAdminBalance.IsEqual(s.chain.GetBalance(sdk.MustAccAddressFromBech32(req.Sender))))
+					s.Require().True(contractAdminBalance.Equal(s.chain.GetBalance(sdk.MustAccAddressFromBech32(req.Sender))))
 				}
 			}
 		})
@@ -114,7 +113,7 @@ func (s *KeeperTestSuite) TestRequestCallback() {
 func (s *KeeperTestSuite) TestCancelCallback() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(102), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	contractAddr := e2eTesting.GenContractAddresses(1)[0]
 	contractAdminAcc := s.chain.GetAccount(2)

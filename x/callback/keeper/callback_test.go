@@ -6,15 +6,14 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	// e2eTesting "github.com/osmosis-labs/osmosis/e2e/testing"
-	// "github.com/osmosis-labs/osmosis/pkg/testutils"
+	e2eTesting "github.com/osmosis-labs/osmosis/v26/tests/e2e/testing"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
 )
 
 func (s *KeeperTestSuite) TestSaveCallback() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(100), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	validCoin := sdk.NewInt64Coin("stake", 10)
 
@@ -269,7 +268,7 @@ func (s *KeeperTestSuite) TestSaveCallback() {
 
 func (s *KeeperTestSuite) TestDeleteCallback() {
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(100), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	validCoin := sdk.NewInt64Coin("stake", 10)
 
@@ -363,16 +362,6 @@ func (s *KeeperTestSuite) TestDeleteCallback() {
 			},
 			expectError: false,
 		},
-		// {
-		// 	testCase: "OK: Success delete - sender is contract owner",
-		// 	callback: types.Callback{
-		// 		ContractAddress: contractAddr.String(),
-		// 		JobId:           3,
-		// 		CallbackHeight:  101,
-		// 		ReservedBy:      contractOwnerAcc.Address.String(),
-		// 	},
-		// 	expectError: false,
-		// },
 	}
 	for _, tc := range testCases {
 		s.Run(fmt.Sprintf("Case: %s", tc.testCase), func() {
@@ -394,7 +383,7 @@ func (s *KeeperTestSuite) TestDeleteCallback() {
 func (s *KeeperTestSuite) TestGetCallbacksByHeight() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(100), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	validCoin := sdk.NewInt64Coin("stake", 10)
 
@@ -446,7 +435,7 @@ func (s *KeeperTestSuite) TestGetCallbacksByHeight() {
 func (s *KeeperTestSuite) TestGetAllCallbacks() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(100), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	validCoin := sdk.NewInt64Coin("stake", 10)
 
@@ -500,7 +489,7 @@ func (s *KeeperTestSuite) TestGetAllCallbacks() {
 func (s *KeeperTestSuite) TestIterateCallbacksByHeight() {
 	// Setting up chain and contract in mock wasm keeper
 	ctx, keeper := s.chain.GetContext().WithBlockHeight(100), s.chain.GetApp().CallbackKeeper
-	contractViewer := testutils.NewMockContractViewer()
+	contractViewer := e2eTesting.NewMockContractViewer()
 	keeper.SetWasmKeeper(contractViewer)
 	validCoin := sdk.NewInt64Coin("stake", 10)
 
