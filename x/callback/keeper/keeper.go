@@ -10,7 +10,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authTypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
-	utils "github.com/osmosis-labs/osmosis/v26/x/callback/utils"
+	"github.com/osmosis-labs/osmosis/v26/x/callback/utils"
 )
 
 // Keeper provides module state operations.
@@ -19,8 +19,8 @@ type Keeper struct {
 	storeKey   storetypes.StoreKey
 	wasmKeeper types.WasmKeeperExpected
 	bankKeeper types.BankKeeperExpected
-	authority     string // this should be the x/gov module account
-	Schema collections.Schema
+	authority  string // this should be the x/gov module account
+	Schema     collections.Schema
 
 	// Params key: ParamsKeyPrefix | value: Params
 	Params collections.Item[types.Params]

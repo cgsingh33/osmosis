@@ -1,7 +1,8 @@
 package types
 
 import (
-	context "context"
+	"context"
+
 	wasmdtypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

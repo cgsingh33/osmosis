@@ -87,7 +87,7 @@ func (s *KeeperTestSuite) TestRequestCallback() {
 	for _, tc := range testCases {
 		s.Run(fmt.Sprintf("Case: %s", tc.testCase), func() {
 			req := tc.input()
-			res, err := msgServer.RequestCallback(sdk.WrapSDKContext(ctx), req)
+			res, err := msgServer.RequestCallback(ctx, req)
 			if tc.expectError {
 				s.Require().Error(err)
 				s.Assert().ErrorIs(err, tc.errorType)
@@ -131,7 +131,7 @@ func (s *KeeperTestSuite) TestCancelCallback() {
 		Sender:          contractAdminAcc.Address.String(),
 		Fees:            sdk.NewInt64Coin("stake", 100),
 	}
-	_, err := msgServer.RequestCallback(sdk.WrapSDKContext(ctx), reqMsg)
+	_, err := msgServer.RequestCallback(ctx, reqMsg)
 	s.Require().NoError(err)
 	callback, err := keeper.GetCallback(ctx, reqMsg.CallbackHeight, reqMsg.ContractAddress, reqMsg.JobId)
 	s.Require().NoError(err)
@@ -195,7 +195,7 @@ func (s *KeeperTestSuite) TestCancelCallback() {
 	for _, tc := range testCases {
 		s.Run(fmt.Sprintf("Case: %s", tc.testCase), func() {
 			req := tc.input()
-			res, err := msgServer.CancelCallback(sdk.WrapSDKContext(ctx), req)
+			res, err := msgServer.CancelCallback(ctx, req)
 			if tc.expectError {
 				s.Require().Error(err)
 				s.Assert().ErrorIs(err, tc.errorType)

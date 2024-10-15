@@ -2,6 +2,7 @@ package e2eTesting
 
 import (
 	"context"
+
 	wasmKeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmdTypes "github.com/CosmWasm/wasmd/x/wasm/types"
 	wasmVmTypes "github.com/CosmWasm/wasmvm/v2/types"

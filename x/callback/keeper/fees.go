@@ -28,7 +28,7 @@ func (k Keeper) EstimateCallbackFees(ctx sdk.Context, blockHeight int64) (sdk.Co
 		return sdk.Coin{}, sdk.Coin{}, sdk.Coin{}, status.Errorf(codes.OutOfRange, "block height %d is too far in the future. max block height callback can be registered at %d", blockHeight, futureReservationThreshold)
 	}
 	// futureReservationFeeMultiplies * (requestBlockHeight - currentBlockHeight)
-	futureReservationFeesAmount := params.FutureReservationFeeMultiplier.MulInt64((blockHeight - ctx.BlockHeight()))
+	futureReservationFeesAmount := params.FutureReservationFeeMultiplier.MulInt64(blockHeight - ctx.BlockHeight())
 
 	// Calculates the fees based on how many callbacks are registered at the given block height
 	callbacksForHeight, err := k.GetCallbacksByHeight(ctx, blockHeight)
@@ -49,7 +49,7 @@ func (k Keeper) EstimateCallbackFees(ctx sdk.Context, blockHeight int64) (sdk.Co
 	return futureReservationFee, blockReservationFee, transactionFee, nil
 }
 
-func (k Keeper) CalculateTransactionFees(ctx sdk.Context, gasAmount uint64, minPriceOfGas sdk.Coin) sdk.Coin {
+func (k Keeper) CalculateTransactionFees(_ sdk.Context, gasAmount uint64, minPriceOfGas sdk.Coin) sdk.Coin {
 	transactionFeeAmount := minPriceOfGas.Amount.MulRaw(int64(gasAmount))
 	transactionFee := sdk.NewCoin(minPriceOfGas.Denom, transactionFeeAmount)
 	return transactionFee

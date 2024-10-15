@@ -21,12 +21,12 @@ func GetStringEventAttribute(events []abci.Event, eventType, attrKey string) str
 		}
 
 		for _, attr := range event.Attributes {
-			if string(attr.Key) != attrKey {
+			if attr.Key != attrKey {
 				continue
 			}
 
-			attrValue := string(attr.Value)
-			if valueUnquoted, err := strconv.Unquote(string(attr.Value)); err == nil {
+			attrValue := attr.Value
+			if valueUnquoted, err := strconv.Unquote(attr.Value); err == nil {
 				attrValue = valueUnquoted
 			}
 

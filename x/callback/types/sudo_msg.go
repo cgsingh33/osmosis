@@ -15,7 +15,7 @@ type CallbackMsg struct {
 	JobID uint64 `json:"job_id"`
 }
 
-// NewCallback creates a new Callback instance.
+// NewCallbackMsg creates a new Callback instance.
 func NewCallbackMsg(jobID uint64) SudoMsg {
 	return SudoMsg{
 		Callback: &CallbackMsg{

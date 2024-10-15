@@ -1,11 +1,12 @@
 package utils
 
 import (
-	storetypes "cosmossdk.io/store/types"
 	"fmt"
+	"os"
+
+	storetypes "cosmossdk.io/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"os"
 )
 
 // ExecuteWithGasLimit executes a function with a gas limit. Taken from: https://github.com/cosmos/cosmos-sdk/pull/18475

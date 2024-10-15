@@ -9,7 +9,7 @@ import (
 
 	"github.com/osmosis-labs/osmosis/v26/x/callback/keeper"
 	"github.com/osmosis-labs/osmosis/v26/x/callback/types"
-	utils "github.com/osmosis-labs/osmosis/v26/x/callback/utils"
+	"github.com/osmosis-labs/osmosis/v26/x/callback/utils"
 )
 
 // EndBlocker fetches all the callbacks registered for the current block height and executes them

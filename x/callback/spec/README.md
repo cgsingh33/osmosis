@@ -4,7 +4,7 @@ This module enables CosmWasm based smart contracts to receive callbacks at the e
 
 ## Concepts
 
-Callbacks are an intent submitted by a smart contract or a contract admin or a contract owner(as set in x/rewards), which requests the protocol to execute an endpoint on the given contract for the desired height. The data structure of a callback can be found at [callback.proto](../../../proto/rollapp/callback/v1/callback.proto#L12).
+Callbacks are an intent submitted by a smart contract or a contract admin or a contract owner(as set in x/rewards), which requests the protocol to execute an endpoint on the given contract for the desired height. The data structure of a callback can be found at [callback.proto](../../../proto/osmosis/callback/v1beta1/callback.proto#L12).
 
 The authorized user can register a callback by providing the following:
 
@@ -39,8 +39,6 @@ where,
 * estimateFees is the x/rewards endpoint used to calculate the current block price of gas. [More](../../rewards/spec/07_client.md#estimate-fees)
 
 > **Note**
->
-> The transaction fee to be paid at the time of registration is calculated based on the x/rewards [EstimateGasFees](../../../proto/rollapp/rewards/v1/query.proto#L39) endpoint for the current height. The refund is calculated based on the gas fees at the execution height. If the gas fee goes up enough in the duration that the tx fee provided during registration is not enough, the validators swallow the loss.
 
 #### 2. Block Reservation Fee
 

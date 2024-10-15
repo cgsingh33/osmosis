@@ -90,8 +90,8 @@ func (a AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 
-	keeper       keeper.Keeper
-	wasmKeeper   types.WasmKeeperExpected
+	keeper     keeper.Keeper
+	wasmKeeper types.WasmKeeperExpected
 }
 
 // NewAppModule creates a new AppModule object.
@@ -104,10 +104,10 @@ func NewAppModule(cdc codec.Codec, keeper keeper.Keeper, wk types.WasmKeeperExpe
 }
 
 // IsAppModule implements the appmodule.AppModule interface.
-func (am AppModule) IsAppModule() {}
+func (a AppModule) IsAppModule() {}
 
 // IsOnePerModuleType is a marker function just indicates that this is a one-per-module type.
-func (am AppModule) IsOnePerModuleType() {}
+func (a AppModule) IsOnePerModuleType() {}
 
 // RegisterInvariants registers the module invariants.
 func (a AppModule) RegisterInvariants(ir sdk.InvariantRegistry) {
@@ -139,7 +139,7 @@ func (a AppModule) ConsensusVersion() uint64 {
 }
 
 // BeginBlock returns the begin blocker for the module.
-func (a AppModule) BeginBlock(ctx context.Context) {}
+func (a AppModule) BeginBlock(context context.Context) {}
 
 // EndBlock returns the end blocker for the module. It returns no validator updates.
 func (a AppModule) EndBlock(context context.Context) error {

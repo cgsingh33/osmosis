@@ -10,7 +10,7 @@ The `query` commands alllows a user to query the module state
 
 Use the `-h`/`--help` flag to get a help description of a command.
 
-`rollapp-wasm q callback -h`
+`osmosisd q callback -h`
 
 > You can add the `-o json` for the JSON output format
 
@@ -20,7 +20,7 @@ Get the current module parameters
 
 Usage:
 
-`rollapp-wasm q callback params [flags]`
+`osmosisd q callback params [flags]`
 
 Example output:
 
@@ -38,11 +38,11 @@ List all the callbacks for the given height
 
 Usage:
 
-`rollapp-wasm q callback callbacks [block-height]`
+`osmosisd q callback callbacks [block-height]`
 
 Example:
 
-`rollapp-wasm q callback callbacks 1234`
+`osmosisd q callback callbacks 1234`
 
 Example output:
 
@@ -73,11 +73,11 @@ Estimate the minimum fees to be paid to register a callback based on the request
 
 Usage:
 
-`rollapp-wasm q callback estimate-callback-fees [block-height]`
+`osmosisd q callback estimate-callback-fees [block-height]`
 
 Example:
 
-`rollapp-wasm q calback estimate-callback-fees 1234`
+`osmosisd q calback estimate-callback-fees 1234`
 
 Example output:
 
@@ -104,7 +104,7 @@ The `tx` commands allows a user to interact with the module.
 
 Use the `-h`/`--help` flag to get a help description of a command.
 
-`rollapp-wasm tx callback -h`
+`osmosisd tx callback -h`
 
 #### request-callback
 
@@ -112,11 +112,11 @@ Create a new callback for the given contract at specified height and given job i
 
 Usage:
 
-`rollapp-wasm tx callback request-callback [contract-address] [job-id] [callback-height] [fee-amount] [flags]`
+`osmosisd tx callback request-callback [contract-address] [job-id] [callback-height] [fee-amount] [flags]`
 
 Example:
 
-`rollapp-wasm tx callback request-callback cosmos1wug8sewp6cedgkmrmvhl3
+`osmosisd tx callback request-callback cosmos1wug8sewp6cedgkmrmvhl3
 lf3tulagm9hnvy8p0rppz9yjw0g4wtqukxvuk 1 1234 7000stake --from myAccountKey`
 
 #### cancel-callback
@@ -125,8 +125,8 @@ Cancel an existing callback for the given contract at specified height and given
 
 Usage:
 
-`rollapp-wasm tx callback cancel-callback [contract-address] [job-id] [callback-height] [flags]`
+`osmosisd tx callback cancel-callback [contract-address] [job-id] [callback-height] [flags]`
 
 Example:
 
-`rollapp-wasm tx callback cancel-callback cosmos1wug8sewp6cedgkmrmvhl3 1 1234  --from myAccountKey`
+`osmosisd tx callback cancel-callback cosmos1wug8sewp6cedgkmrmvhl3 1 1234  --from myAccountKey`

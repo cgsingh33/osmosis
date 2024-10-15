@@ -2,11 +2,11 @@
 
 Section describes all stored by the module objects and their storage keys.
 
-Refer to the [callback.proto](../../../proto/rollapp/callback/v1/callback.proto) for objects fields description.
+Refer to the [callback.proto](../../../proto/osmosis/callback/v1beta1/callback.proto) for objects fields description.
 
 ## Params
 
-[Params](../../../proto/rollapp/callback/v1/callback.proto#L38) object is used to store the module params.
+[Params](../../../proto/osmosis/callback/v1beta1/callback.proto#L38) object is used to store the module params.
 
 The params value can only be updated by x/gov module via a governance upgrade proposal.
 
@@ -16,7 +16,7 @@ Storage keys:
 
 ## Callback
 
-[Callback](../../../proto/rollapp/callback/v1/callback.proto#L12) object is used to store the callbacks which are registered.
+[Callback](../../../proto/osmosis/callback/v1beta1/callback.proto#L12) object is used to store the callbacks which are registered.
 
 The callbacks are pruned after they are executed.
 
